@@ -1,4 +1,5 @@
 import os
+import sys
 import pathlib
 import threading
 from queue import Queue
@@ -11,25 +12,25 @@ def consolidate_data(input_dir, output_file):
 
     # check that the input_dir is not empty/can be walked
     if not os.path.isdir(input_dir):
-        raise NotADirectoryError(f"Input directory {input_dir} is not a directory")
+        raise NotADirectoryError(f"input directory {input_dir} is not a directory")
 
     # collect all the lines
     threads = []
     for root, _, files in os.walk(input_dir):
         for file in files:
             path = os.path.join(root, file)
-            thread = threading.Thread(target=process_file, args=(path,lines))
-            thread.start()
-            threads.append(thread)
+            # each thread processes a file in parallel
+            t = threading.Thread(target=process_file, args=(path,lines))
+            t.start()
+            threads.append(t)
 
     # wait for all threads to finish
-    for thread in threads:
-        thread.join()
+    for t in threads:
+        t.join()
 
     # collect all unique lines
     while not lines.empty():
-        line = lines.get()
-        unique_lines.add(line)
+        unique_lines.add(lines.get())
 
     # write the output file & return error/nil
     try:
@@ -37,7 +38,7 @@ def consolidate_data(input_dir, output_file):
             for line in unique_lines:
                 file.write(f"{line}\n")
     except Exception as e:
-        raise IOError(f"Error creating output file {output_file}: {e}")
+        raise IOError(f"error writing file {output_file}: {e}")
     
 # function to process each file
 def process_file(fp, lines):
@@ -50,4 +51,14 @@ def process_file(fp, lines):
                 if line: # Ignore blank lines
                     lines.put(line)
     except Exception as e:
-        print(f"Error opening file {fp}: {e}")
+        print(f"error opening file {fp}: {e}")
+
+def main():
+    if len(sys.argv) != 3:
+        print(f"to run this program, `python main.py <input_directory> <output_file>`")
+        sys.exit(1)
+
+    consolidate_data(sys.argv[1], sys.argv[2])
+
+if __name__ == "__main__":
+    main()
