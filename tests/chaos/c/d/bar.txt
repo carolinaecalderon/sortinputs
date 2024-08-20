@@ -1,0 +1,3 @@
+text
+binary\x00data\x01
+moretext

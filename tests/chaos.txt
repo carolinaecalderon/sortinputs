@@ -1,0 +1,21 @@
+# Another comment
+# This is a comment
+Apple
+Banana
+CHERRY
+Grape
+a really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really really  really really long line of text
+apple
+banana
+binary\x00data\x01
+cherry
+cherrÿ
+date
+dåte
+grape
+kiwi
+mango
+moretext
+mängo
+random text
+text
