@@ -23,7 +23,10 @@ As my first iteration of this assignment, the Golang solution takes advantage of
 Additionally, to play devil's advocate, if the highest priority for this project is its scalability, performance, and quick implementation, Golang generally has both better metrics than Python when it comes to concurrency/threading on CPUs, and it's easier to read/write than C++ for the sake of a simple take-home assignment.
 
 ### Test cases
-I included three sets of test cases: (1) a "simple" case that matched the example provided in the assignment write-up, (2) a "complex" case with multiple sub-directories and files, and (3) a "chaos" case where I tried to intentionally introduce edge cases to trip up my program.
+I included three sets of test cases: 
+* a "simple" case that matched the example provided in the assignment write-up
+* a "complex" case with multiple sub-directories and files
+* a "chaos" case where I tried to intentionally introduce edge cases to trip up my program
 
 ## Instructions
 ### Python
